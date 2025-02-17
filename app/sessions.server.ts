@@ -1,6 +1,5 @@
 import { createCookieSessionStorage } from "react-router";
 import { COOKIE_SECRET } from "./config";
-import { request } from "http";
 
 type SessionData = {
   userId: string;
@@ -32,4 +31,4 @@ const getSessionFromRequest = async (request: Request) => {
   return session
 }
 
-export { getSessionFromRequest as getSession, commitSession, destroySession };
+export { commitSession, destroySession, getSessionFromRequest as getSession };

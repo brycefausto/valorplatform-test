@@ -1,35 +1,24 @@
-import * as React from "react"
 import {
-  BookOpen,
-  Bot,
   Command,
-  Frame,
-  LifeBuoy,
-  Map,
-  PieChart,
-  Send,
-  Settings2,
-  SquareTerminal,
   Gauge,
+  Settings2,
+  SquareTerminal
 } from "lucide-react"
-import { FaUser } from "react-icons/fa"
+import * as React from "react"
 import { AiFillProduct } from "react-icons/ai"
+import { FaUser } from "react-icons/fa"
 import { MdCategory } from "react-icons/md"
 
+import { Link } from "react-router"
 import { NavMain } from "~/components/nav-main"
-import { NavProjects } from "~/components/nav-projects"
-import { NavSecondary } from "~/components/nav-secondary"
-import { NavUser } from "~/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
+  SidebarMenuItem
 } from "~/components/ui/sidebar"
-import { Link } from "react-router"
 
 const data = {
   user: {
