@@ -1,4 +1,4 @@
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { FaChevronCircleRight } from "react-icons/fa"
 import type { IconType } from "react-icons/lib"
 import { Link } from "react-router"
 
@@ -24,7 +24,7 @@ export function NavMain({
   items: {
     title: string
     url: string
-    icon: LucideIcon
+    icon: IconType
     isActive?: boolean
     items?: {
       title: string
@@ -49,7 +49,7 @@ export function NavMain({
                 <>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuAction className="data-[state=open]:rotate-90">
-                      <ChevronRight />
+                      <FaChevronCircleRight />
                       <span className="sr-only">Toggle</span>
                     </SidebarMenuAction>
                   </CollapsibleTrigger>

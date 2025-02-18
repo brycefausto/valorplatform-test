@@ -1,15 +1,10 @@
-import {
-  Command,
-  Gauge,
-  Settings2,
-  SquareTerminal
-} from "lucide-react"
 import * as React from "react"
-import { AiFillProduct } from "react-icons/ai"
+import { AiFillDashboard, AiFillDatabase, AiFillProduct } from "react-icons/ai"
 import { FaUser } from "react-icons/fa"
 import { MdCategory } from "react-icons/md"
+import { IoMdSettings } from "react-icons/io"
 
-import { Link } from "react-router"
+import { Link, useLoaderData } from "react-router"
 import { NavMain } from "~/components/nav-main"
 import {
   Sidebar,
@@ -19,6 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "~/components/ui/sidebar"
+import type { loader } from "~/routes/dashboard"
 
 const data = {
   user: {
@@ -30,7 +26,7 @@ const data = {
     {
       title: "Manage Data",
       url: "#",
-      icon: SquareTerminal,
+      icon: AiFillDatabase,
       isActive: true,
       items: [
         {
@@ -53,7 +49,7 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: Settings2,
+      icon: IoMdSettings,
       items: [
         {
           title: "General",
@@ -76,7 +72,11 @@ const data = {
   ]
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  appName: string
+}
+
+export function AppSidebar({ appName, ...props }: AppSidebarProps) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -84,12 +84,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">{appName}</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -101,7 +97,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link to="/dashboard">
-                <Gauge />
+                <AiFillDashboard  />
                 <span>Dashboard</span>
               </Link>
             </SidebarMenuButton>

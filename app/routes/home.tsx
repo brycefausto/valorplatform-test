@@ -1,17 +1,20 @@
-import HeroSection from "~/components/home/hero-section";
-import Navbar from "~/components/navbar/navbar";
+import { redirect } from "react-router";
 import type { Route } from "./+types/home";
-import { APP_NAME } from "~/config";
 
 export function loader() {
-  return { appName: APP_NAME };
+  return redirect("/login");
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+  // return (
+  //   <>
+  //     <Navbar appName={loaderData.appName} />
+  //     <HeroSection appName={loaderData.appName} />
+  //   </>
+  // );
+
   return (
     <>
-      <Navbar appName={loaderData.appName} />
-      <HeroSection appName={loaderData.appName} />
     </>
   );
 }
