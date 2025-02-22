@@ -6,7 +6,7 @@ class AuthService {
   registerUser = async (registerDto: RegisterDto) => {
     const user = await userService.createUser(registerDto)
 
-    return user
+    return userService.convertToAppUser(user)
   }
 
   loginUser = async (email: string, password: string) => {
