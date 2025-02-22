@@ -10,7 +10,11 @@ class AuthService {
   }
 
   loginUser = async (email: string, password: string) => {
-    return await prisma.user.findFirst({ where: { email, password } })
+    const user = await prisma.user.findFirst({ where: { email, password } })
+
+    if (user) {
+      return userService.convertToAppUser(user)
+    }
   }
 
   checkAuth = async (id?: string | null) => {
@@ -18,7 +22,11 @@ class AuthService {
       return null
     }
 
-    return await prisma.user.findFirst({ where: { id: parseInt(id) } })
+    const user = await prisma.user.findFirst({ where: { id: parseInt(id) } })
+
+    if (user) {
+      return userService.convertToAppUser(user)
+    }
   }
 }
 
