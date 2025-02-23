@@ -4,17 +4,20 @@ import { User } from "@prisma/client";
 
 class UsersService {
 
-  convertToAppUser = ({ id, ...userData }: User) => {
-    return { ...userData, id: id.toString() } as AppUser
+  convertToAppUser = (user: User) => {
+    return user as AppUser
   }
 
-  createUser = async (newUser: CreateUserDto) => {
-    const existingUser = await prisma.user.findFirst({ where: { email: newUser.email } })
+  createUser = async (userDto: CreateUserDto) => {
+    const existingUser = await prisma.user.findFirst({ where: { email: userDto.email } })
     if (existingUser) {
       throw new Error("Email already exists!")
     }
 
-    const createdUser = await prisma.user.create({ data: newUser })
+    delete userDto["confirmPassword"]
+    userDto.email = userDto.email.toLowerCase()
+
+    const createdUser = await prisma.user.create({ data: userDto })
   
     console.log({ createdUser })
   
@@ -22,7 +25,7 @@ class UsersService {
   }
   
   findUser = async (id: string) => {
-    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } })
+    const user = await prisma.user.findUnique({ where: { id } })
     
     if (user) {
       return this.convertToAppUser(user)
@@ -36,11 +39,12 @@ class UsersService {
   }
   
   updateUser = async (id: string, userDto: UserDto) => {
-    return this.convertToAppUser(await prisma.user.update({ where: { id: parseInt(id) }, data: userDto }))
+    userDto.email = userDto.email.toLowerCase()
+    return this.convertToAppUser(await prisma.user.update({ where: { id }, data: userDto }))
   }
   
   deleteUser = async (id: string) => {
-   await prisma.user.delete({ where: { id: parseInt(id) } })
+   await prisma.user.delete({ where: { id } })
   }
 }
 

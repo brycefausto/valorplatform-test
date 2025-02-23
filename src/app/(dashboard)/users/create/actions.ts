@@ -15,6 +15,7 @@ export async function createUserAction(data: CreateUserData): Promise<ActionResu
     await userService.createUser(createUserDto)
     console.log("User created successfully")
   } catch (error: any) {
+    console.log({ error: error.message })
     return {
       error: error.message,
     };

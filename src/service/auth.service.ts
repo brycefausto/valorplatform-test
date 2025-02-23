@@ -22,7 +22,7 @@ class AuthService {
       return null
     }
 
-    const user = await prisma.user.findFirst({ where: { id: parseInt(id) } })
+    const user = await prisma.user.findFirst({ where: { id } })
 
     if (user) {
       return userService.convertToAppUser(user)

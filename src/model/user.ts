@@ -18,7 +18,10 @@ export type RegisterDto = Omit<AppUser, "id"> & {
   confirmPassword: string
 }
 
-export type CreateUserDto = Omit<AppUser, "id"> & { password: string }
+export type CreateUserDto = Omit<AppUser, "id"> & {
+  password: string,
+  confirmPassword?: string
+}
 
 export type EditUserDto = Omit<AppUser, "id" | "password">
 

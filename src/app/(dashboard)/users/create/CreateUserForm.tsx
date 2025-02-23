@@ -114,7 +114,7 @@ export default function CreateUserForm() {
             placeholder="Confirm your password"
             type={isConfirmVisible ? "text" : "password"}
             variant="bordered"
-            {...register("password")}
+            {...register("confirmPassword")}
           />
           {errors.confirmPassword && (
             <ErrorText>{errors.confirmPassword?.message}</ErrorText>
