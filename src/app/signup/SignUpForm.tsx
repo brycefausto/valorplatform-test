@@ -63,6 +63,7 @@ export default function SignUpForm() {
             placeholder="Enter your email"
             type="email"
             variant="bordered"
+            autoComplete="off"
             {...register("email")}
           />
           {errors.email && (
@@ -90,6 +91,7 @@ export default function SignUpForm() {
             placeholder="Enter your password"
             type={isVisible ? "text" : "password"}
             variant="bordered"
+            autoComplete="new-password"
             {...register("password")}
           />
           {errors.password && (
