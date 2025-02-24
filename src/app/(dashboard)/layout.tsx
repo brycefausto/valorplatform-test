@@ -1,9 +1,10 @@
 import AppNavbar from "@/components/AppNavbar"
 import { AppSidebar } from "@/components/AppSidebar"
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { getUserFromSession } from "@/lib/session"
+import { deleteSession, getUserFromSession } from "@/lib/session"
 import { UserProvider } from "@/providers/user.provider"
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 export default async function DashboardLayout({
   children,
@@ -12,6 +13,11 @@ export default async function DashboardLayout({
 }) {
   const cookie = (await cookies()).get("session")?.value;
   const user = await getUserFromSession(cookie)
+
+  if (!user) {
+    await deleteSession()
+    redirect("/login")
+  }
 
   return (
     <UserProvider user={user}>

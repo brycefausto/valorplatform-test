@@ -41,10 +41,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/profile">
-                <Icon icon="mdi:user-circle" width="24" height="24" />
+              <Link href="/profile" className="text-primary">
+                <Icon icon="mdi:user-circle" width={32} height={32} />
                 <span>Profile</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

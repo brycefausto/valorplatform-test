@@ -10,8 +10,6 @@ import { ActionResultState } from "@/types"
 export async function updateUserAction(id: string, data: UpdateUserData): Promise<ActionResultState> {
   const userDto = data as UserDto
 
-  console.log({ userDto })
-
   try {
     const user = await userService.updateUser(id, userDto)
 

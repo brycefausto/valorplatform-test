@@ -15,6 +15,7 @@ import {
 import AppLogo from "./AppLogo";
 import ProfileAvatar from "./ProfileAvatar";
 import { SidebarTrigger } from "./ui/sidebar";
+import Link from "next/link";
 
 export default function App() {
   const user = useUserContext((s) => s.user)
@@ -45,7 +46,7 @@ export default function App() {
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
+            <DropdownItem key="profile" className="h-14 gap-2" as={Link} href="/profile">
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{user?.email}</p>
             </DropdownItem>

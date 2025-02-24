@@ -13,7 +13,6 @@ export async function createUserAction(data: CreateUserData): Promise<ActionResu
 
   try {
     await userService.createUser(createUserDto)
-    console.log("User created successfully")
   } catch (error: any) {
     console.log({ error: error.message })
     return {

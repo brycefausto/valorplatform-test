@@ -19,8 +19,6 @@ class UsersService {
 
     const createdUser = await prisma.user.create({ data: userDto })
   
-    console.log({ createdUser })
-  
     return createdUser
   }
   
