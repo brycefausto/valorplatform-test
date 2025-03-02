@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { AppUser, CreateUserDto, UserDto } from "@/model/user";
+import { AppUser, CreateUserDto, UpdateUserDto } from "@/model/user";
 import { User } from "@prisma/client";
 
 class UsersService {
@@ -36,7 +36,7 @@ class UsersService {
     return users.map(this.convertToAppUser)
   }
   
-  updateUser = async (id: string, userDto: UserDto) => {
+  updateUser = async (id: string, userDto: UpdateUserDto) => {
     userDto.email = userDto.email.toLowerCase()
     return this.convertToAppUser(await prisma.user.update({ where: { id }, data: userDto }))
   }

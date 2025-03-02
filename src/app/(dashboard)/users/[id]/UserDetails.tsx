@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileAvatar from "@/components/ProfileAvatar";
+import ProfileAvatar from "@/components/ui/profile-avatar/ProfileAvatar";
 import { AppUser } from "@/model/user";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
@@ -26,7 +26,7 @@ export default function UserDetailsForm({ user }: UserDetailsProps) {
           </div>
         </div>
         <div className="flex items-center gap-4 p-4">
-          <ProfileAvatar user={user} className="h-20 w-20" size="lg" isBordered />
+          <ProfileAvatar name={user.name} image={user.image} className="h-20 w-20" size="lg" isBordered />
           <div className="space-y-1.5">
             <h3 className="font-semibold text-lg leading-none">{user.name}</h3>
             <p className="text-sm text-muted-foreground">{user.email}</p>

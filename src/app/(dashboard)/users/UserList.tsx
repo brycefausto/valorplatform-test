@@ -1,6 +1,6 @@
 "use client"
 
-import ProfileAvatar from "@/components/ProfileAvatar";
+import ProfileAvatar from "@/components/ui/profile-avatar/ProfileAvatar";
 import { AppUser } from "@/model/user";
 import { useAlertModal } from "@/providers/alert.modal.provider";
 import { useUserContext } from "@/store/user.store";
@@ -40,7 +40,6 @@ export default function UserList({ users }: UserListProps) {
     const deleteHandler = (id: string) => {
       alert.showDeleteModal("user", async () => {
         await deleteUserAction(id)
-        console.log("User deleted")
       })
     }
 
@@ -48,7 +47,7 @@ export default function UserList({ users }: UserListProps) {
       case "name":
         return (
           <div className="flex flex-row gap-4">
-            <ProfileAvatar user={user} size="sm" />
+            <ProfileAvatar name={user.name} image={user.image} size="sm" />
             <div className="flex items-center">
               <p className="text-bold text-sm capitalize">{cellValue}</p>
             </div>

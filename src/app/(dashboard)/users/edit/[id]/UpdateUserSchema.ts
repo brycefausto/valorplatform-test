@@ -7,4 +7,4 @@ export const updateUserSchema = z.object({
   address: z.string().max(25).optional(),
 })
 
-export type UpdateUserData = z.output<typeof updateUserSchema>
+export type UpdateUserData = z.output<typeof updateUserSchema>  & { image?: string }

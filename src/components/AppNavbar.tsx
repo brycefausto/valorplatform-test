@@ -13,7 +13,7 @@ import {
   NavbarContent
 } from "@heroui/react";
 import AppLogo from "./AppLogo";
-import ProfileAvatar from "./ProfileAvatar";
+import ProfileAvatar from "./ui/profile-avatar/ProfileAvatar";
 import { SidebarTrigger } from "./ui/sidebar";
 import Link from "next/link";
 
@@ -41,13 +41,13 @@ export default function App() {
               className="transition-transform"
               color="secondary"
               size="sm"
-              src="/images/avatar_placeholder.png"
-              user={user}
+              name={user?.name} 
+              image={user?.image}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile">
-              <Link href="/profile">My Profile</Link>
+            <DropdownItem key="profile" textValue="My Profile">
+              <Link className="flex" href="/profile">My Profile</Link>
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
             <DropdownItem key="team_settings">Team Settings</DropdownItem>
