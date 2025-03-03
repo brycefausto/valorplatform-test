@@ -127,11 +127,14 @@ export default function CreateUserForm() {
             {errors.confirmPassword && (
               <ErrorText>{errors.confirmPassword?.message}</ErrorText>
             )}
-            <Select label="Role" labelPlacement="outside" variant={"bordered"} {...register("role")}>
+            <Select variant={"bordered"} label="Role" labelPlacement="outside" placeholder="Role" isRequired {...register("role")}>
               {userRoles.map(value => (
                 <SelectItem key={value}>{value}</SelectItem>
               ))}
             </Select>
+            {errors.role && (
+              <ErrorText>{errors.role?.message}</ErrorText>
+            )}
             <Input
               label="Phone"
               labelPlacement="outside"

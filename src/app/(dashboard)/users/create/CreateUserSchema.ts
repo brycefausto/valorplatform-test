@@ -9,7 +9,7 @@ export const createUserSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
   confirmPassword: z.string().max(25),
-  role: z.nativeEnum(UserRole),
+  role: z.nativeEnum(UserRole, { message: "User role is not selected or not in the list" }),
   phone: z.string().max(25).optional(),
   address: z.string().max(25).optional(),
 })

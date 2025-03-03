@@ -34,6 +34,10 @@ export default function UserDetailsForm({ user }: UserDetailsProps) {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
+            <p className="font-bold text-lg">Role</p>
+            <p className="text-lg">{user.role}</p>
+          </div>
+          <div className="flex flex-col">
             <p className="font-bold text-lg">Phone</p>
             <p className="text-lg">{user.phone}</p>
           </div>

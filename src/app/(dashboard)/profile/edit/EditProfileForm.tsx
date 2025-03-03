@@ -5,7 +5,7 @@ import ProfileAvatarSelector from "@/components/ui/profile-avatar/ProfileAvatarS
 import { BASE_USERS_IMAGE_FOLDER } from "@/config/env"
 import { deleteImage, uploadImage } from "@/lib/imagekitLib"
 import { useUserContext } from "@/store/user.store"
-import { Button, Input } from "@heroui/react"
+import { Button, Input, Select, SelectItem } from "@heroui/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { notFound, useRouter } from "next/navigation"
 import { useState } from "react"
@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 import { UpdateUserData, updateUserSchema } from "../../users/edit/[id]/UpdateUserSchema"
 import { updateUserAction } from "../../users/edit/[id]/actions"
 import Loader from "@/components/Loader"
+import { userRoles } from "@/types/role"
 
 export default function EditProfileForm() {
   const { user, setUser } = useUserContext((s) => s)
@@ -30,6 +31,7 @@ export default function EditProfileForm() {
     defaultValues: {
       email: user.email,
       name: user.name,
+      role: user.role,
       phone: user.phone,
       address: user.address,
     }
@@ -112,6 +114,14 @@ export default function EditProfileForm() {
             />
             {errors.email && (
               <ErrorText>{errors.email?.message}</ErrorText>
+            )}
+            <Select variant={"bordered"} label="Role" labelPlacement="outside" placeholder="Role" isRequired {...register("role")}>
+              {userRoles.map(value => (
+                <SelectItem key={value}>{value}</SelectItem>
+              ))}
+            </Select>
+            {errors.role && (
+              <ErrorText>{errors.role?.message}</ErrorText>
             )}
             <Input
               label="Phone"

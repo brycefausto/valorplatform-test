@@ -13,7 +13,7 @@ export default function ProfileDetails() {
   if (!user) {
     notFound()
   }
-  
+
   return (
     <div className="flex w-full items-center justify-center">
       <div className="flex w-full max-w-xl flex-col gap-4 rounded-large bg-content1 px-8 pb-10 pt-6 shadow-small">
@@ -36,6 +36,10 @@ export default function ProfileDetails() {
           </div>
         </div>
         <div className="flex flex-col gap-4">
+          <div className="flex flex-col">
+            <p className="font-bold text-lg">Role</p>
+            <p className="text-lg">{user.role}</p>
+          </div>
           <div className="flex flex-col">
             <p className="font-bold text-lg">Phone</p>
             <p className="text-lg">{user.phone}</p>
