@@ -2,7 +2,7 @@
 
 import ErrorText from "@/components/ErrorText"
 import { AppUser } from "@/model/user"
-import { Button, Input } from "@heroui/react"
+import { Button, Input, Select, SelectItem } from "@heroui/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -15,6 +15,7 @@ import ProfileAvatarSelector from "@/components/ui/profile-avatar/ProfileAvatarS
 import { useUserContext } from "@/store/user.store"
 import { useRouter } from "next/navigation"
 import Loader from "@/components/Loader"
+import { userRoles } from "@/types/role"
 
 export interface EditUserFormProps {
   user: AppUser
@@ -30,6 +31,7 @@ export default function EditUserForm({ user }: EditUserFormProps) {
     defaultValues: {
       email: user.email,
       name: user.name,
+      role: user.role,
       phone: user.phone,
       address: user.address,
     }
@@ -115,6 +117,11 @@ export default function EditUserForm({ user }: EditUserFormProps) {
             {errors.email && (
               <ErrorText>{errors.email?.message}</ErrorText>
             )}
+            <Select label="Role" labelPlacement="outside" variant={"bordered"} {...register("role")}>
+              {userRoles.map(value => (
+                <SelectItem key={value}>{value}</SelectItem>
+              ))}
+            </Select>
             <Input
               label="Phone"
               labelPlacement="outside"

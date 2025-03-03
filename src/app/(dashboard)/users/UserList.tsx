@@ -22,6 +22,7 @@ import { deleteUserAction } from "./actions";
 export const columns = [
   { name: "NAME", uid: "name" },
   { name: "EMAIL", uid: "email" },
+  { name: "ROLE", uid: "role" },
   { name: "PHONE", uid: "phone" },
   { name: "ADDRESS", uid: "address" },
   { name: "ACTIONS", uid: "actions" },
@@ -54,6 +55,12 @@ export default function UserList({ users }: UserListProps) {
           </div>
         );
       case "email":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm">{cellValue}</p>
+          </div>
+        );
+      case "role":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm">{cellValue}</p>

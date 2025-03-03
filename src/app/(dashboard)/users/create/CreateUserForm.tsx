@@ -1,7 +1,9 @@
 "use client";
 
 import ErrorText from "@/components/ErrorText";
-import { Button, Input } from "@heroui/react";
+import Loader from "@/components/Loader";
+import { UserRole, userRoles } from "@/types/role";
+import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
@@ -9,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { createUserSchema } from "./CreateUserSchema";
 import { createUserAction } from "./actions";
-import Loader from "@/components/Loader";
 
 export default function CreateUserForm() {
   const [loading, setLoading] = useState(false)
@@ -17,6 +18,9 @@ export default function CreateUserForm() {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(createUserSchema),
+    defaultValues: {
+      role: UserRole.ADMIN
+    }
   })
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -123,6 +127,11 @@ export default function CreateUserForm() {
             {errors.confirmPassword && (
               <ErrorText>{errors.confirmPassword?.message}</ErrorText>
             )}
+            <Select label="Role" labelPlacement="outside" variant={"bordered"} {...register("role")}>
+              {userRoles.map(value => (
+                <SelectItem key={value}>{value}</SelectItem>
+              ))}
+            </Select>
             <Input
               label="Phone"
               labelPlacement="outside"

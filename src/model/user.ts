@@ -1,3 +1,5 @@
+import { UserRole } from "@/types/role"
+
 export interface AppUser {
   id: string
   name: string
@@ -5,7 +7,7 @@ export interface AppUser {
   phone?: string
   address?: string
   image?: string
-  role?: string
+  role?: UserRole
 }
 
 export type LoginDto = {

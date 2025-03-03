@@ -1,3 +1,4 @@
+import { UserRole } from "@/types/role";
 import { z } from "zod";
 
 export const createUserSchema = z.object({
@@ -8,6 +9,7 @@ export const createUserSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
   confirmPassword: z.string().max(25),
+  role: z.nativeEnum(UserRole),
   phone: z.string().max(25).optional(),
   address: z.string().max(25).optional(),
 })
