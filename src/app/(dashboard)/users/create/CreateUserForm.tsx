@@ -2,7 +2,7 @@
 
 import ErrorText from "@/components/ErrorText";
 import Loader from "@/components/Loader";
-import { UserRole, userRoles } from "@/types/role";
+import { UserRole, userRoles } from "@/model/user";
 import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";

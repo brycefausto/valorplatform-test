@@ -15,7 +15,7 @@ import ProfileAvatarSelector from "@/components/ui/profile-avatar/ProfileAvatarS
 import { useUserContext } from "@/store/user.store"
 import { useRouter } from "next/navigation"
 import Loader from "@/components/Loader"
-import { userRoles } from "@/types/role"
+import { userRoles } from "@/model/user"
 
 export interface EditUserFormProps {
   user: AppUser

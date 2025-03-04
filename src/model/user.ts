@@ -1,5 +1,3 @@
-import { UserRole } from "@/types/role"
-
 export interface AppUser {
   id: string
   name: string
@@ -9,6 +7,16 @@ export interface AppUser {
   image?: string
   role?: UserRole
 }
+
+export enum UserRole {
+  ADMIN = "Admin",
+  DISTRIBUTOR = "Distributor",
+  RESELLER = "Reseller",
+  VIP = "VIP",
+  CUSTOMER = "Customer"
+}
+
+export const userRoles = Object.values(UserRole)
 
 export type LoginDto = {
   email: string;

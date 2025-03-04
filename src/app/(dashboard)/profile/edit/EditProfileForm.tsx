@@ -14,7 +14,7 @@ import { toast } from "react-toastify"
 import { UpdateUserData, updateUserSchema } from "../../users/edit/[id]/UpdateUserSchema"
 import { updateUserAction } from "../../users/edit/[id]/actions"
 import Loader from "@/components/Loader"
-import { userRoles } from "@/types/role"
+import { userRoles } from "@/model/user"
 
 export default function EditProfileForm() {
   const { user, setUser } = useUserContext((s) => s)

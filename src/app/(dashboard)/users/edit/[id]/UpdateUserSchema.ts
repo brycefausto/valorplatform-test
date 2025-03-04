@@ -1,4 +1,4 @@
-import { UserRole } from "@/types/role";
+import { UserRole } from "@/model/user";
 import { z } from "zod";
 
 export const updateUserSchema = z.object({
