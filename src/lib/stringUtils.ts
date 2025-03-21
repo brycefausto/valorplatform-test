@@ -1,8 +1,3 @@
-import _ from "lodash"
-
-export const capitalizeWords = (text: string, separator = ' ') => {
-  return text.split(separator).reduce((prev, current, index) => prev += (index == 0 ? '' : ' ') + _.capitalize(current), '')
-}
 
 export const convertToUrlParams = (queryParams: { [key: string]: string | number }) => {
   const urlParams = new URLSearchParams()

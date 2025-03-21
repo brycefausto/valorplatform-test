@@ -4,10 +4,6 @@ import { logout } from "@/app/login/actions";
 import { APP_NAME } from "@/config/env";
 import { useUserContext } from "@/store/user.store";
 import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Navbar,
   NavbarBrand,
   NavbarContent
@@ -16,6 +12,7 @@ import AppLogo from "./AppLogo";
 import ProfileAvatar from "./ui/profile-avatar/ProfileAvatar";
 import { SidebarTrigger } from "./ui/sidebar";
 import Link from "next/link";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 export default function App() {
   const user = useUserContext((s) => s.user)
@@ -33,8 +30,8 @@ export default function App() {
         <span className="text-xl font-bold mr-2">
           {user?.name}
         </span>
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
             <ProfileAvatar
               isBordered
               as="button"
@@ -44,22 +41,22 @@ export default function App() {
               name={user?.name} 
               image={user?.image}
             />
-          </DropdownTrigger>
-          <DropdownMenu variant="flat">
-            <DropdownItem key="profile" textValue="My Profile">
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem key="profile" textValue="My Profile">
               <Link className="flex" href="/profile">My Profile</Link>
-            </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger" onPress={() => logout()}>
+            </DropdownMenuItem>
+            <DropdownMenuItem key="settings">My Settings</DropdownMenuItem>
+            <DropdownMenuItem key="team_settings">Team Settings</DropdownMenuItem>
+            <DropdownMenuItem key="analytics">Analytics</DropdownMenuItem>
+            <DropdownMenuItem key="system">System</DropdownMenuItem>
+            <DropdownMenuItem key="configurations">Configurations</DropdownMenuItem>
+            <DropdownMenuItem key="help_and_feedback">Help & Feedback</DropdownMenuItem>
+            <DropdownMenuItem key="logout" color="danger" onClick={() => logout()}>
               Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </NavbarContent>
     </Navbar>
   );
