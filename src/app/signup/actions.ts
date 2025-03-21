@@ -13,8 +13,9 @@ export async function signUpAction(data: SignUpData): Promise<ActionResultState>
 
   try {
     const user = await authService.registerUser(registerDto)
+    const { token } = await authService.loginUser(data.email, data.password)
 
-    await createSession(user.id);
+    await createSession(user.id, token);
   } catch (error: any) {
     return {
       error: error.message,
