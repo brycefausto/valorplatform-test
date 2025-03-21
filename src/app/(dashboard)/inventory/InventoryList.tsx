@@ -60,6 +60,7 @@ export default function InventoryList({ data, page, search }: InventoryListProps
   const deleteHandler = (inventory: InventoryItem) => {
     alert.showDeleteModal("inventory", async () => {
       await deleteInventoryItemAction(inventory)
+      router.refresh()
     })
   }
 
@@ -90,6 +91,8 @@ export default function InventoryList({ data, page, search }: InventoryListProps
           hideProgressBar: true,
           theme: "colored",
         })
+      } else {
+        router.refresh()
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -129,9 +132,9 @@ export default function InventoryList({ data, page, search }: InventoryListProps
             <TableColumn align="start">
               ITEM NAME
             </TableColumn>
-            {/* <TableColumn align="start">
+            <TableColumn align="start">
               VARIANT
-            </TableColumn> */}
+            </TableColumn>
             <TableColumn align="start">
               IMAGE
             </TableColumn>
@@ -155,11 +158,11 @@ export default function InventoryList({ data, page, search }: InventoryListProps
                     </div>
                   </div>
                 </TableCell>
-                {/* <TableCell>
+                <TableCell>
                   <div className="flex flex-col">
-                    <p className="text-bold text-sm">{inventoryItem.variantName}</p>
+                    <p className="text-bold text-sm">{(inventoryItem.item?.variants?.length || 0) > 1 ? inventoryItem.variantName : ""}</p>
                   </div>
-                </TableCell> */}
+                </TableCell>
                 <TableCell>
                   <div className="flex flex-col">
                     <ImageHolder src={getImage(inventoryItem)} alt={inventoryItem.item?.name} width={90} radius="none" />

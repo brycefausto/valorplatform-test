@@ -32,5 +32,5 @@ export async function deleteInventoryItemAction(inventory: InventoryItem) {
     };
   }
 
-  // revalidatePath("/inventory")
+  revalidatePath("/inventory")
 }
