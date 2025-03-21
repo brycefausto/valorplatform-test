@@ -152,10 +152,10 @@ export default function CreateItemForm() {
                 onValueChange={(value) => setPrice(value)}
               />
             )}
-            {/* <Checkbox isSelected={hasVariants} onValueChange={setHasVariants}>Has variants</Checkbox>
+            <Checkbox isSelected={hasVariants} onValueChange={setHasVariants}>Has variants</Checkbox>
             {hasVariants && (
               <ItemVariantForm onChange={setItemVariantData} />
-            )} */}
+            )}
             <Button color="primary" type="submit" disabled={loading}>
               Save
             </Button>

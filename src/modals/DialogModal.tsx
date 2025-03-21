@@ -2,13 +2,13 @@
 'use client';
 
 import {
+  Button, 
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "@heroui/modal";
-import { Button } from "@heroui/react";
+} from "@heroui/react";
 import { Icon } from "@iconify/react";
 
 export interface DialogModalProps {

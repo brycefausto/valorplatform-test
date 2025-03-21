@@ -174,10 +174,10 @@ export default function EditItemForm({ item }: EditItemFormProps) {
                 onValueChange={(value) => setPrice(value)}
               />
             )}
-            {/* <Checkbox isSelected={hasVariants} onValueChange={setHasVariants}>Has variants</Checkbox>
+            <Checkbox isSelected={hasVariants} onValueChange={setHasVariants}>Has variants</Checkbox>
             {hasVariants && (
               <ItemVariantForm value={itemVariantData} onChange={setItemVariantData} />
-            )} */}
+            )}
             <Button color="primary" type="submit" disabled={loading}>
               Save
             </Button>
