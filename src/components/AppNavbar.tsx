@@ -45,7 +45,7 @@ export default function App() {
               image={user?.image}
             />
           </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownMenu variant="flat">
             <DropdownItem key="profile" textValue="My Profile">
               <Link className="flex" href="/profile">My Profile</Link>
             </DropdownItem>
