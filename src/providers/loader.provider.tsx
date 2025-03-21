@@ -26,8 +26,6 @@ export function useLoader() {
 export default function LoaderProvider({ children }: PropsWithChildren) {
   const [show, setShow] = useState(false)
 
-  console.log("is loader shown", show)
-
   return (
     <LoaderContext.Provider value={{ show, setShow }}>
       <>

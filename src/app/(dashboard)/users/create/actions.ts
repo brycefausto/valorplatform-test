@@ -12,7 +12,7 @@ export async function createUserAction(data: CreateUserData): Promise<ActionResu
   const createUserDto = data as CreateUserDto;
 
   try {
-    await userService.createUser(createUserDto)
+    await userService.create(createUserDto)
   } catch (error: any) {
     console.log({ error: error.message })
     return {

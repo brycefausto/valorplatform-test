@@ -6,7 +6,7 @@ import { BASE_USERS_IMAGE_URL } from '@/config/env'
 
 export interface ProfileAvatarSelectorProps extends ProfileAvatarProps {
   onChangeFile?: (file: File) => void
-  onDeleteFile?: (name: string) => void
+  onDeleteFile?: (image: string) => void
 }
 
 export default function ProfileAvatarSelector({ name, image, onChangeFile, onDeleteFile, ...props }: ProfileAvatarSelectorProps) {

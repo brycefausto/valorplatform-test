@@ -6,6 +6,7 @@ import { useAlertModal } from "@/providers/alert.modal.provider";
 import { useUserContext } from "@/store/user.store";
 import {
   Button,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -16,8 +17,12 @@ import {
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import React, { Key } from "react";
+import React, { Key, useState } from "react";
 import { deleteUserAction } from "./actions";
+import { PaginatedDocument } from "@/model";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { pageUtils } from "@/lib/pageUtils";
+import SearchInput from "@/components/inputs/SearchInput";
 
 export const columns = [
   { name: "NAME", uid: "name" },
@@ -29,18 +34,34 @@ export const columns = [
 ];
 
 export interface UserListProps {
-  users: AppUser[];
+  data: PaginatedDocument<AppUser>
+  page: number
+  search: string
 }
 
-export default function UserList({ users }: UserListProps) {
+export default function UserList({ data, page, search }: UserListProps) {
+  const users = data.docs
   const appUser = useUserContext((s) => s.user)
   const alert = useAlertModal()
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState(search)
+
+  const handlePageChange = (newPage: number) => {
+    pageUtils.changePage(newPage, searchParams, router, pathname)
+  }
+
+  const handleSearchChange = (newSearch: string) => {
+    setSearchQuery(newSearch)
+    pageUtils.changeSearch(newSearch, searchParams, router, pathname)
+  }
 
   const renderCell = React.useCallback((user: AppUser, columnKey: Key) => {
     const cellValue = user[columnKey as keyof AppUser];
-    const deleteHandler = (id: string) => {
+    const deleteHandler = (user: AppUser) => {
       alert.showDeleteModal("user", async () => {
-        await deleteUserAction(id)
+        await deleteUserAction(user)
       })
     }
 
@@ -89,7 +110,7 @@ export default function UserList({ users }: UserListProps) {
               </Button>
 
             </Tooltip>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit">
               <Button variant="light" color="primary" isIconOnly as={Link} href={`/users/edit/${user.id}`}>
                 <span className="text-lg text-primary cursor-pointer active:opacity-50">
                   <Icon icon="mdi:edit-outline" width="24" height="24" />
@@ -97,8 +118,8 @@ export default function UserList({ users }: UserListProps) {
               </Button>
             </Tooltip>
             {appUser?.id !== user.id ? (
-              <Tooltip color="danger" content="Delete user">
-                <Button type="submit" variant="light" color="danger" isIconOnly onPress={() => deleteHandler(user.id)}>
+              <Tooltip color="danger" content="Delete">
+                <Button type="submit" variant="light" color="danger" isIconOnly onPress={() => deleteHandler(user)}>
                   <span className="text-lg text-danger cursor-pointer active:opacity-50">
                     <Icon icon="mdi:delete-outline" width="24" height="24" />
                   </span>
@@ -130,7 +151,7 @@ export default function UserList({ users }: UserListProps) {
           <div className="flex flex-auto">
           </div>
           <div className="mr-5">
-            {/* <SearchInput value={searchQuery} onChange={setSearchQuery} /> */}
+            <SearchInput value={searchQuery} onChange={handleSearchChange} />
           </div>
           <Button className="justify-self-end" color="primary" as={Link} href="/users/create">Add</Button>
         </div>
@@ -150,6 +171,9 @@ export default function UserList({ users }: UserListProps) {
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex justify-center">
+        <Pagination initialPage={page} total={1} showControls onChange={handlePageChange} />
       </div>
     </div>
   );

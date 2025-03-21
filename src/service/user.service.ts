@@ -1,48 +1,38 @@
-import prisma from "@/lib/prisma";
+import serverFetch from "@/lib/serverFetch";
+import { convertToUrlParams } from "@/lib/stringUtils";
+import { PaginatedDocument } from "@/model";
 import { AppUser, CreateUserDto, UpdateUserDto } from "@/model/user";
-import { User } from "@prisma/client";
+import { QueryParams } from "@/types";
+
+const BASE_URL = '/users'
 
 class UsersService {
 
-  convertToAppUser = (user: User) => {
-    return user as AppUser
-  }
-
-  createUser = async (userDto: CreateUserDto) => {
-    const existingUser = await prisma.user.findFirst({ where: { email: userDto.email } })
-    if (existingUser) {
-      throw new Error("Email already exists!")
-    }
-
-    delete userDto["confirmPassword"]
-    userDto.email = userDto.email.toLowerCase()
-
-    const createdUser = await prisma.user.create({ data: userDto })
+  create = async (userDto: CreateUserDto) => {
+    const createdUser = await serverFetch.post<AppUser>(BASE_URL, userDto)
   
     return createdUser
   }
   
-  findUser = async (id: string) => {
-    const user = await prisma.user.findUnique({ where: { id } })
+  findOne = async (id: string) => {
+    const { data: user } = await serverFetch.get<AppUser>(`${BASE_URL}/${id}`)
     
-    if (user) {
-      return this.convertToAppUser(user)
-    }
+    return user
   }
   
-  getUsers = async () => {
-    const users = await prisma.user.findMany()
+  findAll = async (queryParams: QueryParams) => {
+    const { data } = await serverFetch.get<PaginatedDocument<AppUser>>(`${BASE_URL}?${convertToUrlParams(queryParams)}`)
 
-    return users.map(this.convertToAppUser)
+    return data
   }
   
-  updateUser = async (id: string, userDto: UpdateUserDto) => {
-    userDto.email = userDto.email.toLowerCase()
-    return this.convertToAppUser(await prisma.user.update({ where: { id }, data: userDto }))
+  update = async (id: string, userDto: UpdateUserDto) => {
+    const { data: user } = await serverFetch.put<AppUser>(`${BASE_URL}/${id}`, userDto)
+    return user
   }
   
-  deleteUser = async (id: string) => {
-   await prisma.user.delete({ where: { id } })
+  delete = async (id: string) => {
+   await serverFetch.delete(`${BASE_URL}/${id}`)
   }
 }
 

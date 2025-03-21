@@ -11,15 +11,9 @@ export async function loginAction(data: LoginData): Promise<ActionResultState> {
   const { email, password } = data
 
   try {
-    const user = await authService.loginUser(email, password)
+    const { user, token } = await authService.loginUser(email, password)
 
-    if (!user) {
-      return {
-        error: "Invalid email or password",
-      }
-    }
-
-    await createSession(user.id);
+    await createSession(user.id, token);
   } catch (error: any) {
     return {
       error: error.message,

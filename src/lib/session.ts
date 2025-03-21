@@ -6,9 +6,9 @@ import { userService } from "@/service/user.service"
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
 
-export async function createSession(userId: string) {
+export async function createSession(userId: string, token: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await encrypt({ userId, expiresAt })
+  const session = await encrypt({ userId, token, expiresAt })
   const sessionCookies = await cookies()
 
   sessionCookies.set("session", session, {
@@ -24,6 +24,7 @@ export async function deleteSession() {
 
 type SessionPayload = {
   userId: string
+  token: string
   expiresAt: Date
 }
 
@@ -54,7 +55,7 @@ export async function getUserFromSession(session: string | undefined = "") {
       const id = payload.userId as string | undefined
 
       if (id) {
-        const user = await userService.findUser(id)
+        const user = await userService.findOne(id)
 
         return user
       }

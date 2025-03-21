@@ -25,7 +25,7 @@ export default function UserDetailsForm({ user }: UserDetailsProps) {
             </Button>
           </div>
         </div>
-        <div className="flex items-center gap-4 p-4">
+        <div className="flex items-center gap-4">
           <ProfileAvatar name={user.name} image={user.image} className="h-20 w-20" size="lg" isBordered />
           <div className="space-y-1.5">
             <h3 className="font-semibold text-lg leading-none">{user.name}</h3>

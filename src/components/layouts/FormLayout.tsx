@@ -14,7 +14,7 @@ export default function FormLayout({ title, backUrl, children }: FormLayoutProps
 
   return (
     <div>
-      <div className="flex p-5">
+      <div className="flex sticky top-0">
         {backUrl ? (
           <Link href={backUrl}>
             <Button className="justify-self-start" variant="bordered" color="secondary">Back</Button>
@@ -26,7 +26,7 @@ export default function FormLayout({ title, backUrl, children }: FormLayoutProps
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="w-[500px]">
+        <div className="min-w-[500px]">
           {title && (
             <div className="mb-5">
               <span className="text-4xl font-bold">{title}</span>

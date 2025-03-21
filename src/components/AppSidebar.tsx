@@ -35,6 +35,22 @@ export function AppSidebar() {
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link href="/items" className="text-primary">
+                <Icon icon="mdi:format-list-bulleted" width={32} height={32} />
+                <span>Items</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link href="/inventory" className="text-primary">
+              <Icon icon="mdi:package" width={32} height={32} />
+                <span>Inventory</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-4 bg-white">

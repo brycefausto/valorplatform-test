@@ -49,26 +49,27 @@ export default function EditUserForm({ user }: EditUserFormProps) {
         data.image = undefined
         await deleteImage(user.image)
       }
+      
+      const resultState = await updateUserAction(user.id, data)
+      if (appUser?.id == user.id) {
+        setUser({ ...user, ...data })
+      }
+      if (resultState.message) {
+        toast.success(resultState.message, {
+          position: "bottom-center",
+          hideProgressBar: true,
+          theme: "colored",
+        })
+      } else if (resultState.error) {
+        toast.error(resultState.error, {
+          position: "bottom-center",
+          hideProgressBar: true,
+          theme: "colored",
+        })
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.message, {
-        position: "bottom-center",
-        hideProgressBar: true,
-        theme: "colored",
-      })
-    }
-    const resultState = await updateUserAction(user.id, data)
-    if (appUser?.id == user.id) {
-      setUser({ ...user, ...data })
-    }
-    if (resultState.message) {
-      toast.success(resultState.message, {
-        position: "bottom-center",
-        hideProgressBar: true,
-        theme: "colored",
-      })
-    } else if (resultState.error) {
-      toast.error(resultState.error, {
         position: "bottom-center",
         hideProgressBar: true,
         theme: "colored",

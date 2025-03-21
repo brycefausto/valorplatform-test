@@ -7,7 +7,7 @@ import FormLayout from '@/components/layouts/FormLayout'
 
 export default async function UserPage({ params }: ParamsWithId) {
     const { id } = await params
-    const user = await userService.findUser(id)
+    const user = await userService.findOne(id)
   
     if (!user) {
       notFound()

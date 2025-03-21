@@ -1,20 +1,22 @@
-import prisma from "@/lib/prisma";
-import { RegisterDto } from "@/model/user";
+import serverFetch from "@/lib/serverFetch";
+import { AppUser, RegisterDto } from "@/model/user";
 import { userService } from "./user.service";
 
+export type LoginResult = {
+  user: AppUser
+  token: string
+}
 class AuthService {
   registerUser = async (registerDto: RegisterDto) => {
-    const user = await userService.createUser(registerDto)
+    const { data: user } = await userService.create(registerDto)
 
-    return userService.convertToAppUser(user)
+    return user
   }
 
   loginUser = async (email: string, password: string) => {
-    const user = await prisma.user.findFirst({ where: { email, password } })
+    const { data } = await serverFetch.post<LoginResult>('/auth/login', { email, password })
 
-    if (user) {
-      return userService.convertToAppUser(user)
-    }
+    return data
   }
 
   checkAuth = async (id?: string | null) => {
@@ -22,11 +24,9 @@ class AuthService {
       return null
     }
 
-    const user = await prisma.user.findFirst({ where: { id } })
+    const user = await userService.findOne(id)
 
-    if (user) {
-      return userService.convertToAppUser(user)
-    }
+    return user
   }
 }
 

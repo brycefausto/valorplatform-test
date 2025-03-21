@@ -38,20 +38,20 @@ export function useAlertModal() {
     setOnConfirm(() => () => {})
   }
 
-  const showMessageModal = (message: string, callback: ConfirmCallback) => {
+  const showMessageModal = (message: string, callback?: ConfirmCallback) => {
     setShow(true)
     setType(ModalType.MESSAGE)
     setMessage(message)
-    setOnConfirm(() => callback)
+    setOnConfirm(() => callback || (() => {}))
 
     return { close }
   }
 
-  const showDialogModal = (message: string, callback: ConfirmCallback) => {
+  const showDialogModal = (message: string, callback?: ConfirmCallback) => {
     setShow(true)
     setType(ModalType.DIALOG)
     setMessage(message)
-    setOnConfirm(() => callback)
+    setOnConfirm(() => callback || (() => {}))
 
     return { close }
   }

@@ -1,20 +1,12 @@
-import Image, { ImageProps } from 'next/image'
+import { Image, ImageProps } from '@heroui/react'
 import React from 'react'
-
-interface ImageHolderProps extends Omit<ImageProps, "src" | "alt"> {
-  imageName: string
-}
 
 const placeholder = '/images/placeholder.svg'
 
-export default function ImageHolder({ imageName, ...props }: ImageHolderProps) {
-  let src = placeholder
-
-  if (imageName != '') {
-    src = imageName
-  }
+export default function ImageHolder({ src: srcProp, alt, ...props }: ImageProps) {
+  const src = srcProp || placeholder
 
   return (
-    <Image src={src} placeholder="blur" blurDataURL={placeholder} alt={imageName} {...props} />
+    <Image src={src} placeholder="blur" alt={alt} radius="none" {...props} />
   )
 }

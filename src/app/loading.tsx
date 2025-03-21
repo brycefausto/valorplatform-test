@@ -1,3 +1,5 @@
+'use client'
+
 import LoadingScreen from '@/components/LoadingScreen'
 import React from 'react'
 

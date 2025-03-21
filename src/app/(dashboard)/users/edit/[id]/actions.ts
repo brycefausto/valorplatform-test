@@ -14,7 +14,7 @@ export async function updateUserAction(id: string, data: UpdateUserData): Promis
       userDto.image = null
     }
 
-    const user = await userService.updateUser(id, userDto)
+    const user = await userService.update(id, userDto)
 
     if (user) {
       revalidatePath("/users")
